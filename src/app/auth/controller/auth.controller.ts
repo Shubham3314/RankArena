@@ -1,9 +1,7 @@
 import { Body, Controller, Post, Req, Request, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from '../service/auth.service';
-// import { CustomLocalGuard } from '../guard/custom-local.guard';
 import { AuthGuard } from '@nestjs/passport';
-import { LoginRequestDto } from '../dto/request/login.request.dto';
 import { SignupRequestDto } from '../dto/request/signup.request.dto';
 
 @Controller('auth')
