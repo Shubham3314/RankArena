@@ -11,12 +11,11 @@ Production-ready contest and quiz backend built with NestJS, TypeORM, MySQL, Red
 - **Submissions**: Join contest, save answers, submit, scoring
 - **Leaderboard**: Paginated, materialized entries
 - **Prizes**: Prize awards, winners endpoint
-- **Jobs**: Bull queue for contest end processing (compute winners, award prizes)
 - **Common**: Roles decorator, RolesGuard, ContestAccessGuard, Throttler, validation
 
 ## Tech Stack
 
-- NestJS 11, TypeScript, TypeORM, MySQL, Redis, Bull, JWT, bcrypt, class-validator, class-transformer
+- NestJS 11, TypeScript, TypeORM, MySQL, JWT, bcrypt, class-validator, class-transformer
 
 ## Environment Variables
 
@@ -33,10 +32,6 @@ DATABASE_URL=mysql://root:@localhost:3306/rank_arena
 JWT_SECRET=your-jwt-secret-key-change-in-production
 JWT_EXPIRES_IN=1h
 REFRESH_TOKEN_SECRET=your-refresh-token-secret-change-in-production
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASSWORD=
-BULL_REDIS_URL=redis://localhost:6379
 ```
 
 ## Setup
@@ -84,20 +79,6 @@ npm run worker
 ```
 
 Processes contest end jobs (compute winners, award prizes, populate leaderboard).
-
-### Run Tests
-
-```bash
-npm test
-```
-
-Unit tests for scoring logic.
-
-```bash
-npm run test:e2e
-```
-
-E2E tests (requires DB and seed).
 
 ## API Overview
 
@@ -147,10 +128,3 @@ E2E tests (requires DB and seed).
 3. Run "Login Admin" to set `adminToken`
 4. Run "Login Normal User" to set `normalToken`
 5. Use `contestId` from Create Contest response
-
-## Troubleshooting
-
-- **DB connection failed**: Ensure MySQL is running and credentials match `.env`
-- **Redis connection failed**: Start Redis (`redis-server`) for Bull
-- **JWT errors**: Set `JWT_SECRET` and `REFRESH_TOKEN_SECRET` in `.env`
-- **E2E fails**: Run migrations and seed first
