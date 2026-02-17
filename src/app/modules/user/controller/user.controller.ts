@@ -1,17 +1,37 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Patch,
+  Param,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { UserGuard } from 'src/common/guards/user.guard';
-import { User } from 'src/app/entities/user/user.entity';
-import { CurrentUser } from 'src/common/decorator/user.decorator';
+import { UserGuard } from '../../../../common/guards/user.guard';
+import { RoleGuard } from '../../../../common/guards/role.guard';
+import { CurrentUser } from '../../../../common/decorator/user.decorator';
+import { User } from '../../../entities/user/user.entity';
+import { Roles } from '../../../../common/decorator/roles.decorator';
+import { Role } from '../../../entities/user/user.entity';
+import { UpdateRoleDto } from '../dto/update-role.dto';
 
-
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('me')
   @UseGuards(UserGuard)
-  async getUser(@CurrentUser() user: User) {
-    return await this.userService.getUserByEmail(user.email)
+  async getMe(@CurrentUser() user: User) {
+    return this.userService.getUserByEmail(user.email);
+  }
+
+  @Patch(':id/role')
+  @UseGuards(UserGuard, RoleGuard)
+  @Roles(Role.ADMIN)
+  async updateRole(
+    @Param('id') id: string,
+    @Body() dto: UpdateRoleDto,
+  ) {
+    return this.userService.updateRole(Number(id), dto.role);
   }
 }

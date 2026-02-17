@@ -1,36 +1,36 @@
-import { Body, Controller, Post, Req, Request, UseGuards } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from '../service/auth.service';
-import { AuthGuard } from '@nestjs/passport';
+import { CustomLocalGuard } from '../guard/custom-local.guard';
 import { SignupRequestDto } from '../dto/request/signup.request.dto';
+import { RefreshRequestDto } from '../dto/request/refresh.request.dto';
+import { Throttle } from '@nestjs/throttler';
+
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(AuthGuard('client-local'))
-  @Post('verify')
-  async verify(@Request() req: any) {
-    return await this.authService.signIn(req.user);
+  @UseGuards(CustomLocalGuard)
+  @Post('login')
+  async login(@Request() req: { user: any }) {
+    return this.authService.signIn(req.user);
   }
 
   @Post('refresh')
-  async refreshToken(@Req() req: Request) {
-    const jwtService = new JwtService();
-
-    const authorization = req.headers['authorization'];
-
-    const token = authorization.split(' ')[1];
-
-    const payload = await jwtService.verifyAsync(token, {
-      secret: process.env.JWT_REFRESH_TOKEN_SECRET,
-    });
-    return await this.authService.refreshToken(payload);
+  async refreshToken(@Body() dto: RefreshRequestDto) {
+    return this.authService.refreshToken(dto.refreshToken);
   }
 
   @Post('signup')
   async signup(@Body() signupDto: SignupRequestDto) {
-    return await this.authService.signupWithEmailPassword(
+    return this.authService.signupWithEmailPassword(
       signupDto.fullName,
       signupDto.email,
       signupDto.password,

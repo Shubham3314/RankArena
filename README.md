@@ -1,98 +1,156 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# RankArena
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Production-ready contest and quiz backend built with NestJS, TypeORM, MySQL, Redis, and Bull.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **Auth**: Signup, login, refresh tokens, JWT, bcrypt password hashing, role promotion
+- **Users**: Profile, role management (admin only)
+- **Contests**: CRUD, access levels (normal/vip), join, leaderboard
+- **Questions**: Single, multi, true/false types with options
+- **Submissions**: Join contest, save answers, submit, scoring
+- **Leaderboard**: Paginated, materialized entries
+- **Prizes**: Prize awards, winners endpoint
+- **Jobs**: Bull queue for contest end processing (compute winners, award prizes)
+- **Common**: Roles decorator, RolesGuard, ContestAccessGuard, Throttler, validation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tech Stack
 
-## Project setup
+- NestJS 11, TypeScript, TypeORM, MySQL, Redis, Bull, JWT, bcrypt, class-validator, class-transformer
 
-```bash
-$ npm install
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```
+PORT=8082
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=
+DB_NAME=rank_arena
+DATABASE_URL=mysql://root:@localhost:3306/rank_arena
+JWT_SECRET=your-jwt-secret-key-change-in-production
+JWT_EXPIRES_IN=1h
+REFRESH_TOKEN_SECRET=your-refresh-token-secret-change-in-production
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+BULL_REDIS_URL=redis://localhost:6379
 ```
 
-## Compile and run the project
+## Setup
+
+### Install
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm ci
 ```
 
-## Run tests
+### Migrations
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run typeorm:migrate
 ```
 
-## Deployment
+Or apply `dump.sql` manually to create the schema.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Seed
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run seed
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Creates:
 
-## Resources
+- Admin: `admin@rankarena.test` / `AdminPass123!`
+- VIP: `vip@rankarena.test` / `VipPass123!`
+- Normal: `normal@rankarena.test` / `NormalPass123!`
+- One normal contest and one VIP contest with questions and options
 
-Check out a few resources that may come in handy when working with NestJS:
+### Run Server
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+npm run start:dev
+```
 
-## Support
+Server runs at `http://localhost:8082`. API prefix: `/api/v1`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Run Worker
 
-## Stay in touch
+```bash
+npm run build
+npm run worker
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Processes contest end jobs (compute winners, award prizes, populate leaderboard).
 
-## License
+### Run Tests
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+npm test
+```
+
+Unit tests for scoring logic.
+
+```bash
+npm run test:e2e
+```
+
+E2E tests (requires DB and seed).
+
+## API Overview
+
+### Auth
+
+- `POST /auth/signup` - Register
+- `POST /auth/login` - Login
+- `POST /auth/refresh` - Refresh token (body: `{ refreshToken }`)
+
+### Users
+
+- `GET /users/me` - Get current user (JWT)
+- `PATCH /users/:id/role` - Update role (admin only)
+
+### Contests
+
+- `POST /contests` - Create (admin)
+- `PATCH /contests/:id` - Update (admin)
+- `GET /contests` - List
+- `GET /contests/:id` - Detail
+- `POST /contests/:id/join` - Join (authenticated)
+- `GET /contests/:id/leaderboard?limit=&offset=` - Leaderboard
+- `POST /contests/:id/compute-winner` - Compute winners (admin)
+- `GET /contests/:id/winners` - Prize awards
+
+### Questions
+
+- `POST /contests/:id/questions` - Add question (admin)
+- `PATCH /questions/:id` - Update question (admin)
+
+### Submissions
+
+- `POST /contests/:id/answers` - Save answer (body: `{ questionId, optionIds }`)
+- `POST /contests/:id/submit` - Submit all
+- `GET /contests/:id/answers/me` - My in-progress answers
+
+## Scoring Rules
+
+- **Single-select & True/False**: Correct option → `question.points`, else 0
+- **Multi-select**: `question.points` per correct option selected, no penalty for wrong
+- **Tie-break**: Earlier `submitted_at` ranks higher
+
+## Postman
+
+1. Import `rankarena.postman_collection.json`
+2. Set environment: `baseUrl` = `http://localhost:8082/api/v1`
+3. Run "Login Admin" to set `adminToken`
+4. Run "Login Normal User" to set `normalToken`
+5. Use `contestId` from Create Contest response
+
+## Troubleshooting
+
+- **DB connection failed**: Ensure MySQL is running and credentials match `.env`
+- **Redis connection failed**: Start Redis (`redis-server`) for Bull
+- **JWT errors**: Set `JWT_SECRET` and `REFRESH_TOKEN_SECRET` in `.env`
+- **E2E fails**: Run migrations and seed first

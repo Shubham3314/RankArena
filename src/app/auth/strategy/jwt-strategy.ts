@@ -3,10 +3,11 @@ dotenv.config();
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UserService } from '../../modules/user/service/user.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor() {
+  constructor(private readonly userService: UserService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -14,12 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: any) {
-    return {
-      email: payload.email,
-      id: payload.id,
-      fullName: payload.fullName,
-      role: payload.role,
-    };
+  async validate(payload: { id: number; email: string; role: string }) {
+    const user = await this.userService.getUserById(payload.id);
+    if (!user) {
+      return null;
+    }
+    return user;
   }
 }
