@@ -11,11 +11,10 @@ export class AllExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
 
     if (exception instanceof HttpException) {
-      console.log(exception);
       httpStatus = exception.getStatus();
       responseBody = exception.getResponse();
     } else if (exception instanceof Error) {
-      console.log(exception);
+      console.log(exception)
       switch (exception.name) {
         case 'NotFoundError':
           httpStatus = HttpStatus.NOT_FOUND;
@@ -43,17 +42,23 @@ export class AllExceptionFilter implements ExceptionFilter {
 
         default:
           httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-          exception.message = 'Something went wrong!';
           break;
       }
 
       responseBody = {
         statusCode: httpStatus,
-        message: exception.message,
-        error: exception.name,
+        message: exception.message ?? 'Internal server error',
+        error: exception.name ?? 'Error',
+      };
+    } else {
+      httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+      responseBody = {
+        statusCode: 500,
+        message: 'Internal server error',
+        error: 'Unknown',
       };
     }
 
-    response.status(httpStatus).json(responseBody);
+    response.status(httpStatus ?? 500).json(responseBody);
   }
 }

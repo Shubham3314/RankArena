@@ -1,0 +1,264 @@
+{
+  "info": {
+    "name": "RankArena API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8082/api/v1" },
+    { "key": "adminToken", "value": "" },
+    { "key": "normalToken", "value": "" },
+    { "key": "contestId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup Admin",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Admin User\",\n  \"email\": \"admin@rankarena.test\",\n  \"password\": \"AdminPass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/signup"
+          }
+        },
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('adminToken', json.accessToken);"]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@rankarena.test\",\n  \"password\": \"AdminPass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Login Normal User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('normalToken', json.accessToken);"]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"normal@rankarena.test\",\n  \"password\": \"NormalPass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/refresh"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": "{{baseUrl}}/users/me"
+          }
+        },
+        {
+          "name": "Update User Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"vip\"\n}"
+            },
+            "url": "{{baseUrl}}/users/2/role"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contests",
+      "item": [
+        {
+          "name": "Create Contest",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('contestId', json.id);"]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sample Contest\",\n  \"description\": \"Contest description\",\n  \"accessLevel\": \"normal\",\n  \"startTime\": \"2025-02-14T00:00:00.000Z\",\n  \"endTime\": \"2025-02-21T00:00:00.000Z\",\n  \"prizeDescription\": \"First place wins\",\n  \"isPublished\": true\n}"
+            },
+            "url": "{{baseUrl}}/contests"
+          }
+        },
+        {
+          "name": "List Contests",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contests"
+          }
+        },
+        {
+          "name": "Get Contest Detail",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contests/{{contestId}}"
+          }
+        },
+        {
+          "name": "Update Contest",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Contest Name\"\n}"
+            },
+            "url": "{{baseUrl}}/contests/{{contestId}}"
+          }
+        },
+        {
+          "name": "Join Contest",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
+            "url": "{{baseUrl}}/contests/{{contestId}}/join"
+          }
+        },
+        {
+          "name": "Save Answer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{normalToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"questionId\": 1,\n  \"optionIds\": [1]\n}"
+            },
+            "url": "{{baseUrl}}/contests/{{contestId}}/answers"
+          }
+        },
+        {
+          "name": "Submit Contest",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
+            "url": "{{baseUrl}}/contests/{{contestId}}/submit"
+          }
+        },
+        {
+          "name": "Get My Answers",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
+            "url": "{{baseUrl}}/contests/{{contestId}}/answers/me"
+          }
+        },
+        {
+          "name": "Get Leaderboard",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contests/{{contestId}}/leaderboard?limit=20&offset=0"
+          }
+        },
+        {
+          "name": "Compute Winner",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": "{{baseUrl}}/contests/{{contestId}}/compute-winner"
+          }
+        },
+        {
+          "name": "Get Winners",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contests/{{contestId}}/winners"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "item": [
+        {
+          "name": "Add Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"single\",\n  \"text\": \"What is 2+2?\",\n  \"points\": 1,\n  \"options\": [\n    { \"text\": \"4\", \"isCorrect\": true },\n    { \"text\": \"3\", \"isCorrect\": false }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/contests/{{contestId}}/questions"
+          }
+        },
+        {
+          "name": "Update Question",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Updated question text\"\n}"
+            },
+            "url": "{{baseUrl}}/questions/1"
+          }
+        }
+      ]
+    }
+  ]
+}
