@@ -1,14 +1,11 @@
 {
   "info": {
+    "_postman_id": "21162ffa-3edb-4c73-95a1-b5a49c3ddf22",
     "name": "RankArena API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51485724",
+    "_collection_link": "https://go.postman.co/collection/51485724-21162ffa-3edb-4c73-95a1-b5a49c3ddf22?source=collection_link"
   },
-  "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8082/api/v1" },
-    { "key": "adminToken", "value": "" },
-    { "key": "normalToken", "value": "" },
-    { "key": "contestId", "value": "1" }
-  ],
   "item": [
     {
       "name": "Auth",
@@ -17,13 +14,94 @@
           "name": "Signup Admin",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fullName\": \"Admin User\",\n  \"email\": \"admin@rankarena.test\",\n  \"password\": \"AdminPass123!\"\n}"
             },
-            "url": "{{baseUrl}}/auth/signup"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Signup Admin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"Normal User\",\n  \"email\": \"normal1@rankarena.test\",\n  \"password\": \"NormalPass123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/signup",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "signup"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "480"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1e0-AGxSd1yA966To6vEodVaAwfVJlU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:14:04 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJlbWFpbCI6Im5vcm1hbDFAcmFua2FyZW5hLnRlc3QiLCJyb2xlIjoibm9ybWFsIiwiaWF0IjoxNzcxMzM3NjQ0LCJleHAiOjE3NzEzNDEyNDR9.iwyy-p0ZmbX20VYJj0T40QT04RgBXCirsYF91ddaMms\",\n    \"accessTokenExpiry\": 1771341244268,\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJlbWFpbCI6Im5vcm1hbDFAcmFua2FyZW5hLnRlc3QiLCJyb2xlIjoibm9ybWFsIiwiaWF0IjoxNzcxMzM3NjQ0LCJleHAiOjE3NzE5NDI0NDR9.7-F4S6Ie2KSYkAAp8dYu-Ut3ykKzZbId3s0bpd-86Rk\"\n}"
+            }
+          ]
         },
         {
           "name": "Login Admin",
@@ -31,19 +109,104 @@
             {
               "listen": "test",
               "script": {
-                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('adminToken', json.accessToken);"]
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('adminToken', json.accessToken);"
+                ],
+                "type": "text/javascript"
               }
             }
           ],
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"admin@rankarena.test\",\n  \"password\": \"AdminPass123!\"\n}"
             },
-            "url": "{{baseUrl}}/auth/login"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login Admin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@rankarena.test\",\n  \"password\": \"AdminPass123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "472"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d8-S7S4NkG7bY9rJ9cMY+jh07gExTM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:23:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6ImFkbWluQHJhbmthcmVuYS50ZXN0Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcxMzM4MTgyLCJleHAiOjE3NzEzNDE3ODJ9.ypygy1i2YKoVOP7vqbgXNR4YJQuiFOdzCE7M6kH5Hio\",\n    \"accessTokenExpiry\": 1771341782372,\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6ImFkbWluQHJhbmthcmVuYS50ZXN0Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcxMzM4MTgyLCJleHAiOjE3NzE5NDI5ODJ9.sByK82LUiR2ksUcgj8jSh6f-TcwaxOMnW-8YB1vN8YY\"\n}"
+            }
+          ]
         },
         {
           "name": "Login Normal User",
@@ -51,31 +214,131 @@
             {
               "listen": "test",
               "script": {
-                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('normalToken', json.accessToken);"]
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('normalToken', json.accessToken);"
+                ],
+                "type": "text/javascript"
               }
             }
           ],
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"normal@rankarena.test\",\n  \"password\": \"NormalPass123!\"\n}"
             },
-            "url": "{{baseUrl}}/auth/login"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login Normal User",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"normal@rankarena.test\",\n  \"password\": \"NormalPass123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "478"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1de-XzB4tdoajHIdwzy/Otdb9VIq2+Q\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:23:16 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJlbWFpbCI6Im5vcm1hbEByYW5rYXJlbmEudGVzdCIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE3NzEzMzgxOTYsImV4cCI6MTc3MTM0MTc5Nn0.WuevDiM2OQjuMAchXKRhxjyP-oX4UNHtioZLdLqdcvQ\",\n    \"accessTokenExpiry\": 1771341796650,\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJlbWFpbCI6Im5vcm1hbEByYW5rYXJlbmEudGVzdCIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE3NzEzMzgxOTYsImV4cCI6MTc3MTk0Mjk5Nn0.Z_8TW718peYRGrzU7V5hG_IaGBh90fEWutnReJ3Z6Ys\"\n}"
+            }
+          ]
         },
         {
           "name": "Refresh Token",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
             },
-            "url": "{{baseUrl}}/auth/refresh"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -85,25 +348,210 @@
         {
           "name": "Get Me",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
-            "url": "{{baseUrl}}/users/me"
-          }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Me",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "255"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"ff-X0bngKwuoTqcc69j6/d84Hc0l+M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:23:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"3\",\n    \"email\": \"normal@rankarena.test\",\n    \"passwordHash\": \"$2b$10$jVMLKZ4TKIhPoHR/jH8CUuYj.hqZjUpAbumzD4Pl9let3hKoBiLvm\",\n    \"fullName\": \"Normal User\",\n    \"role\": \"normal\",\n    \"isActive\": true,\n    \"createdAt\": \"2026-02-14T10:17:46.323Z\",\n    \"updatedAt\": \"2026-02-14T10:18:31.369Z\"\n}"
+            }
+          ]
         },
         {
           "name": "Update User Role",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PATCH",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"role\": \"vip\"\n}"
             },
-            "url": "{{baseUrl}}/users/2/role"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/users/2/role",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "2",
+                "role"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update User Role",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"vip\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/2/role",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2",
+                    "role"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "246"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"f6-VqolcbQJuaQrqD90kI7paZOo/XM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:34:28 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"2\",\n    \"email\": \"vip@rankarena.test\",\n    \"passwordHash\": \"$2b$10$D1WMKslFaMOhatAgQbZ35et0IAIwnEb8YX5fnjVDJeFHq2Y58bxx6\",\n    \"fullName\": \"Vip User\",\n    \"role\": \"vip\",\n    \"isActive\": true,\n    \"createdAt\": \"2026-02-14T10:16:08.192Z\",\n    \"updatedAt\": \"2026-02-14T10:17:04.000Z\"\n}"
+            }
+          ]
         }
       ]
     },
@@ -116,112 +564,1254 @@
             {
               "listen": "test",
               "script": {
-                "exec": ["var json = pm.response.json();", "pm.collectionVariables.set('contestId', json.id);"]
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('contestId', json.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Sample Contest\",\n  \"description\": \"Contest description\",\n  \"accessLevel\": \"normal\",\n  \"startTime\": \"2025-02-14T00:00:00.000Z\",\n  \"endTime\": \"2025-02-21T00:00:00.000Z\",\n  \"prizeDescription\": \"First place wins\",\n  \"isPublished\": true\n}"
+              "raw": "{\n  \"name\": \"Contest 1\",\n  \"description\": \"Contest description\",\n  \"accessLevel\": \"normal\",\n  \"startTime\": \"2025-02-14T00:00:00.000Z\",\n  \"endTime\": \"2025-02-15T00:00:00.000Z\",\n  \"prizeDescription\": \"1000Rs Cash prize\",\n  \"isPublished\": true\n}"
             },
-            "url": "{{baseUrl}}/contests"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/contests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Contest",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Contest 3\",\n  \"description\": \"Contest description\",\n  \"accessLevel\": \"normal\",\n  \"startTime\": \"2025-02-17T00:00:00.000Z\",\n  \"endTime\": \"2025-02-18T00:00:00.000Z\",\n  \"prizeDescription\": \"2000Rs Cash prize\",\n  \"isPublished\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "338"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"152-r5P/DH1WfhoSkzUFKMcCTR9z/nM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:35:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"name\": \"Contest 3\",\n    \"description\": \"Contest description\",\n    \"accessLevel\": \"normal\",\n    \"startTime\": \"2025-02-17T00:00:00.000Z\",\n    \"endTime\": \"2025-02-18T00:00:00.000Z\",\n    \"prizeDescription\": \"2000Rs Cash prize\",\n    \"isPublished\": true,\n    \"createdBy\": \"1\",\n    \"awardsComputedAt\": null,\n    \"createdAt\": \"2026-02-17T14:35:05.766Z\",\n    \"updatedAt\": \"2026-02-17T14:35:05.766Z\"\n}"
+            }
+          ]
         },
         {
           "name": "List Contests",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contests"
-          }
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List Contests",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/contests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1390"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56e-lRYtxts3NoibPVMKxdpveYGakiY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:35:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 4,\n        \"name\": \"Contest 3\",\n        \"description\": \"Contest description\",\n        \"accessLevel\": \"normal\",\n        \"startTime\": \"2025-02-17T00:00:00.000Z\",\n        \"endTime\": \"2025-02-18T00:00:00.000Z\",\n        \"prizeDescription\": \"2000Rs Cash prize\",\n        \"isPublished\": true,\n        \"createdBy\": \"1\",\n        \"awardsComputedAt\": null,\n        \"createdAt\": \"2026-02-17T14:35:05.766Z\",\n        \"updatedAt\": \"2026-02-17T14:35:05.766Z\"\n    },\n    {\n        \"id\": 1,\n        \"name\": \"Contest 1\",\n        \"description\": \"Contest description\",\n        \"accessLevel\": \"normal\",\n        \"startTime\": \"2025-02-14T00:00:00.000Z\",\n        \"endTime\": \"2025-02-15T00:00:00.000Z\",\n        \"prizeDescription\": \"1000Rs Cash prize\",\n        \"isPublished\": true,\n        \"createdBy\": \"1\",\n        \"awardsComputedAt\": null,\n        \"createdAt\": \"2026-02-14T10:19:42.812Z\",\n        \"updatedAt\": \"2026-02-14T10:19:42.812Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Contest 1\",\n        \"description\": \"Contest description\",\n        \"accessLevel\": \"normal\",\n        \"startTime\": \"2025-02-14T00:00:00.000Z\",\n        \"endTime\": \"2025-02-15T00:00:00.000Z\",\n        \"prizeDescription\": \"1000Rs Cash prize\",\n        \"isPublished\": true,\n        \"createdBy\": \"1\",\n        \"awardsComputedAt\": null,\n        \"createdAt\": \"2026-02-14T10:22:54.618Z\",\n        \"updatedAt\": \"2026-02-14T10:22:54.618Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Updated Contest Name\",\n        \"description\": \"Contest description\",\n        \"accessLevel\": \"normal\",\n        \"startTime\": \"2025-02-14T00:00:00.000Z\",\n        \"endTime\": \"2025-02-15T00:00:00.000Z\",\n        \"prizeDescription\": \"1000Rs Cash prize\",\n        \"isPublished\": true,\n        \"createdBy\": \"1\",\n        \"awardsComputedAt\": \"2026-02-14T10:43:00.000Z\",\n        \"createdAt\": \"2026-02-14T10:23:56.731Z\",\n        \"updatedAt\": \"2026-02-14T10:43:00.000Z\"\n    }\n]"
+            }
+          ]
         },
         {
           "name": "Get Contest Detail",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contests/{{contestId}}"
-          }
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Contest Detail",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "338"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"152-r5P/DH1WfhoSkzUFKMcCTR9z/nM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:35:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"name\": \"Contest 3\",\n    \"description\": \"Contest description\",\n    \"accessLevel\": \"normal\",\n    \"startTime\": \"2025-02-17T00:00:00.000Z\",\n    \"endTime\": \"2025-02-18T00:00:00.000Z\",\n    \"prizeDescription\": \"2000Rs Cash prize\",\n    \"isPublished\": true,\n    \"createdBy\": \"1\",\n    \"awardsComputedAt\": null,\n    \"createdAt\": \"2026-02-17T14:35:05.766Z\",\n    \"updatedAt\": \"2026-02-17T14:35:05.766Z\"\n}"
+            }
+          ]
         },
         {
           "name": "Update Contest",
           "request": {
             "method": "PATCH",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Updated Contest Name\"\n}"
             },
-            "url": "{{baseUrl}}/contests/{{contestId}}"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Contest",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Contest Name 4\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "351"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"15f-IocTiasDKDDBmAK/2pwFAxPWa7g\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:35:45 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"name\": \"Updated Contest Name 4\",\n    \"description\": \"Contest description\",\n    \"accessLevel\": \"normal\",\n    \"startTime\": \"2025-02-17T00:00:00.000Z\",\n    \"endTime\": \"2025-02-18T00:00:00.000Z\",\n    \"prizeDescription\": \"2000Rs Cash prize\",\n    \"isPublished\": true,\n    \"createdBy\": \"1\",\n    \"awardsComputedAt\": null,\n    \"createdAt\": \"2026-02-17T14:35:05.766Z\",\n    \"updatedAt\": \"2026-02-17T14:35:45.000Z\"\n}"
+            }
+          ]
         },
         {
           "name": "Join Contest",
           "request": {
             "method": "POST",
-            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
-            "url": "{{baseUrl}}/contests/{{contestId}}/join"
-          }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{normalToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/join",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "join"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Join Contest Conflict",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/join",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "join"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "77"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4d-8Fd+z/fg5IirKtxlEprsyyCGgiA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:24:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Already joined this contest\",\n    \"error\": \"Conflict\",\n    \"statusCode\": 409\n}"
+            },
+            {
+              "name": "Join Contest",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/join",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "join"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "125"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"7d-ujC9oivuszcm4oCNIGzF8/RD0JA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:36:01 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 2,\n    \"contestId\": 4,\n    \"userId\": \"3\",\n    \"joinedAt\": \"2026-02-17T14:36:01.000Z\",\n    \"submittedAt\": null,\n    \"status\": \"in_progress\",\n    \"score\": 0\n}"
+            }
+          ]
         },
         {
           "name": "Save Answer",
           "request": {
             "method": "POST",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{normalToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{normalToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"questionId\": 1,\n  \"optionIds\": [1]\n}"
             },
-            "url": "{{baseUrl}}/contests/{{contestId}}/answers"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/answers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "answers"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Save Answer",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"questionId\": 1,\n  \"optionIds\": [1]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/answers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "answers"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "69"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"45-Ok5DwBzoxPA6JCh+Sqt/EAEjhr4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:36:27 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Question not found\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+            },
+            {
+              "name": "Save Answer",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"questionId\": 6,\n  \"optionIds\": [11]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/answers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "answers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "94"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5e-iJVZ2wjHbUH9BVQG2DAjojDxEXs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:37:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 2,\n    \"participantId\": 2,\n    \"questionId\": 6,\n    \"optionId\": 11,\n    \"createdAt\": \"2026-02-17T14:37:02.327Z\"\n}"
+            }
+          ]
         },
         {
           "name": "Submit Contest",
           "request": {
             "method": "POST",
-            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
-            "url": "{{baseUrl}}/contests/{{contestId}}/submit"
-          }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{normalToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "submit"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Submit Contest",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "70"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"46-VkeXTrtqMjapixZse88QnD3U8dk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:24:47 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Already submitted\",\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+            },
+            {
+              "name": "Submit Contest",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "submit"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "11"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"b-6o0SSpSVnDSlo9P1u8iVapOc+s4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:37:15 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"score\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Get My Answers",
           "request": {
             "method": "GET",
-            "header": [{"key": "Authorization", "value": "Bearer {{normalToken}}"}],
-            "url": "{{baseUrl}}/contests/{{contestId}}/answers/me"
-          }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{normalToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/answers/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "answers",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get My Answers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{normalToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/answers/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "answers",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "310"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"136-XpHrp9WoIZgcqZMxN8WQ9eBsTno\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:37:24 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 2,\n        \"participantId\": 2,\n        \"questionId\": 6,\n        \"question\": {\n            \"id\": 6,\n            \"contestId\": 4,\n            \"type\": \"single\",\n            \"text\": \"What is 2+2?\",\n            \"points\": 1,\n            \"orderIndex\": 0,\n            \"createdAt\": \"2026-02-17T14:36:37.085Z\"\n        },\n        \"optionId\": 11,\n        \"option\": {\n            \"id\": 11,\n            \"questionId\": 6,\n            \"text\": \"4\",\n            \"isCorrect\": true,\n            \"orderIndex\": 0\n        },\n        \"createdAt\": \"2026-02-17T14:37:02.327Z\"\n    }\n]"
+            }
+          ]
         },
         {
           "name": "Get Leaderboard",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contests/{{contestId}}/leaderboard?limit=20&offset=0"
-          }
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/leaderboard?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "leaderboard"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Leaderboard",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/leaderboard?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "leaderboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "307"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"133-gdYWa6++ZMrNxF3ZmPliAg7HP0M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:37:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"entries\": [\n        {\n            \"rank\": 1,\n            \"score\": 1,\n            \"user\": {\n                \"id\": \"3\",\n                \"email\": \"normal@rankarena.test\",\n                \"passwordHash\": \"$2b$10$jVMLKZ4TKIhPoHR/jH8CUuYj.hqZjUpAbumzD4Pl9let3hKoBiLvm\",\n                \"fullName\": \"Normal User\",\n                \"role\": \"normal\",\n                \"isActive\": true,\n                \"createdAt\": \"2026-02-14T10:17:46.323Z\",\n                \"updatedAt\": \"2026-02-14T10:18:31.369Z\"\n            }\n        }\n    ],\n    \"total\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Compute Winner",
           "request": {
             "method": "POST",
-            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
-            "url": "{{baseUrl}}/contests/{{contestId}}/compute-winner"
-          }
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/compute-winner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "compute-winner"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Compute Winner",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/compute-winner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "compute-winner"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "84"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"54-L6DhziH0/nhaHl4XFaxpxzvtNYk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:25:21 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"You do not have the required role\",\n    \"error\": \"Forbidden\",\n    \"statusCode\": 403\n}"
+            },
+            {
+              "name": "Compute Winner",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/compute-winner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "compute-winner"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "760"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2f8-gaLFRkdMx9Qv7WjPPqw7mufxvZw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:37:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"winners\": [\n        {\n            \"id\": 2,\n            \"contestId\": 4,\n            \"userId\": \"3\",\n            \"user\": {\n                \"id\": \"3\",\n                \"email\": \"normal@rankarena.test\",\n                \"passwordHash\": \"$2b$10$jVMLKZ4TKIhPoHR/jH8CUuYj.hqZjUpAbumzD4Pl9let3hKoBiLvm\",\n                \"fullName\": \"Normal User\",\n                \"role\": \"normal\",\n                \"isActive\": true,\n                \"createdAt\": \"2026-02-14T10:17:46.323Z\",\n                \"updatedAt\": \"2026-02-14T10:18:31.369Z\"\n            },\n            \"awardedAt\": \"2026-02-17T14:37:51.000Z\",\n            \"prizeDetails\": \"2000Rs Cash prize\"\n        }\n    ],\n    \"leaderboard\": [\n        {\n            \"id\": 2,\n            \"contestId\": 4,\n            \"userId\": \"3\",\n            \"user\": {\n                \"id\": \"3\",\n                \"email\": \"normal@rankarena.test\",\n                \"passwordHash\": \"$2b$10$jVMLKZ4TKIhPoHR/jH8CUuYj.hqZjUpAbumzD4Pl9let3hKoBiLvm\",\n                \"fullName\": \"Normal User\",\n                \"role\": \"normal\",\n                \"isActive\": true,\n                \"createdAt\": \"2026-02-14T10:17:46.323Z\",\n                \"updatedAt\": \"2026-02-14T10:18:31.369Z\"\n            },\n            \"score\": 1,\n            \"rank\": 1,\n            \"computedAt\": \"2026-02-17T14:37:51.000Z\"\n        }\n    ]\n}"
+            }
+          ]
         },
         {
           "name": "Get Winners",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contests/{{contestId}}/winners"
-          }
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/winners",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "winners"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Winners",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/winners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "winners"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "374"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"176-Dr2jcxvWLQjIj9TkI0FKjZrDdus\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:38:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 2,\n        \"contestId\": 4,\n        \"userId\": \"3\",\n        \"user\": {\n            \"id\": \"3\",\n            \"email\": \"normal@rankarena.test\",\n            \"passwordHash\": \"$2b$10$jVMLKZ4TKIhPoHR/jH8CUuYj.hqZjUpAbumzD4Pl9let3hKoBiLvm\",\n            \"fullName\": \"Normal User\",\n            \"role\": \"normal\",\n            \"isActive\": true,\n            \"createdAt\": \"2026-02-14T10:17:46.323Z\",\n            \"updatedAt\": \"2026-02-14T10:18:31.369Z\"\n        },\n        \"awardedAt\": \"2026-02-17T14:37:51.000Z\",\n        \"prizeDetails\": \"2000Rs Cash prize\"\n    }\n]"
+            }
+          ]
         }
       ]
     },
@@ -233,32 +1823,154 @@
           "request": {
             "method": "POST",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"type\": \"single\",\n  \"text\": \"What is 2+2?\",\n  \"points\": 1,\n  \"options\": [\n    { \"text\": \"4\", \"isCorrect\": true },\n    { \"text\": \"3\", \"isCorrect\": false }\n  ]\n}"
             },
-            "url": "{{baseUrl}}/contests/{{contestId}}/questions"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/contests/{{contestId}}/questions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contests",
+                "{{contestId}}",
+                "questions"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Add Question",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"single\",\n  \"text\": \"What is 2+2?\",\n  \"points\": 1,\n  \"options\": [\n    { \"text\": \"4\", \"isCorrect\": true },\n    { \"text\": \"3\", \"isCorrect\": false }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contests/{{contestId}}/questions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contests",
+                    "{{contestId}}",
+                    "questions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "274"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"112-z2gSrLsCKEVOFJuk6Tb2WUJK/Zs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Feb 2026 14:36:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 6,\n    \"contestId\": 4,\n    \"type\": \"single\",\n    \"text\": \"What is 2+2?\",\n    \"points\": 1,\n    \"orderIndex\": 0,\n    \"createdAt\": \"2026-02-17T14:36:37.085Z\",\n    \"options\": [\n        {\n            \"id\": 11,\n            \"questionId\": 6,\n            \"text\": \"4\",\n            \"isCorrect\": true,\n            \"orderIndex\": 0\n        },\n        {\n            \"id\": 12,\n            \"questionId\": 6,\n            \"text\": \"3\",\n            \"isCorrect\": false,\n            \"orderIndex\": 1\n        }\n    ]\n}"
+            }
+          ]
         },
         {
           "name": "Update Question",
           "request": {
             "method": "PATCH",
             "header": [
-              {"key": "Authorization", "value": "Bearer {{adminToken}}"},
-              {"key": "Content-Type", "value": "application/json"}
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"text\": \"Updated question text\"\n}"
             },
-            "url": "{{baseUrl}}/questions/1"
-          }
+            "url": {
+              "raw": "{{baseUrl}}/questions/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "questions",
+                "1"
+              ]
+            }
+          },
+          "response": []
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8082/api/v1"
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "normalToken",
+      "value": ""
+    },
+    {
+      "key": "contestId",
+      "value": "1"
     }
   ]
 }
